@@ -12,7 +12,7 @@ export class createImages1602966251204 implements MigrationInterface {
                 unsigned: true, // essa coluna sempre será positivo
                 isPrimary: true, // indica que a coluna é a chave primaria
                 isGenerated: true, // coluna gerada automaticamente
-                generationStrategy: "increment", // usa a logica de incremento automatico
+                generationStrategy: "increment" // usa a logica de incremento automatico
             },
 				{
 					name: "path",
@@ -20,7 +20,7 @@ export class createImages1602966251204 implements MigrationInterface {
 				},
 				{
 					name: "orphanage_id",
-					type: "integer"
+					type: "id"
 				}
 
           ],

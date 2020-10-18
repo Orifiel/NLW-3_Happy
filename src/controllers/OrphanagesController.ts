@@ -1,13 +1,13 @@
-import { Request, Response } from "express"
 import { getRepository } from 'typeorm'
-import Orphanage from '../models/Orphanages'
+import Orphanage from '../models/Orphanage'
+import { Request, Response } from "express"
 
 export default {
     //Buscando todos os Orfanatos cadastrados
     async index(request:Request, response:Response) {
-        const orphanageRepository = getRepository(Orphanage);
+        const orphanagesRepository = getRepository(Orphanage);
 
-        const orphanages = await orphanageRepository.find();
+        const orphanages = await orphanagesRepository.find();
 
         return response.json(orphanages)
     },
@@ -15,9 +15,9 @@ export default {
     // Buscando um orfanato especifico através do ID.
     async show(request:Request, response:Response) {
         const { id } = request.params
-        const orphanageRepository = getRepository(Orphanage);
+        const orphanagesRepository = getRepository(Orphanage);
 
-        const orphanage = await orphanageRepository.findOneOrFail(id);
+        const orphanage = await orphanagesRepository.findOneOrFail(id);
 
         return response.json(orphanage)
     },
@@ -34,14 +34,14 @@ export default {
             open_on_weekends
          } = request.body
     
-         const orphanageRepository =  getRepository(Orphanage);
+         const orphanagesRepository =  getRepository(Orphanage);
 
-         const requestImages = request.files as Express.Multer.file[];
+         const requestImages = request.files as Express.Multer.File[];
          const images = requestImages.map(image => {
              return { path: image.filename }
          })
 
-         const orphanage = orphanageRepository.create({
+         const orphanages = orphanagesRepository.create({
             name,
             latitude, 
             longitude, 
@@ -52,8 +52,8 @@ export default {
             images
          })
     
-         await orphanageRepository.save(orphanage)
+         await orphanagesRepository.save(orphanages)
     
-        return response.status(201).json(orphanage)
+        return response.status(201).json(orphanages)
     }
     }
