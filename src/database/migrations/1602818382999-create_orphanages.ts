@@ -49,7 +49,7 @@ export class createOrphanages1602818382999 implements MigrationInterface {
             default: false,
           }
 
-        ]
+        ],
       }))
     }
 
